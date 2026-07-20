@@ -1,0 +1,14 @@
+group: API0100
+technology: ASP.NET (System.Web)
+category: web
+patterns:
+  - id: API0101
+    kind: namespace
+    match: System.Web
+    severity: blocker
+    note: No modern equivalent; requires migration to ASP.NET Core.
+  - id: API0102
+    kind: type
+    match: System.Web.HttpContext
+    severity: blocker
+    note: Replace with Microsoft.AspNetCore.Http.HttpContext during rewrite.

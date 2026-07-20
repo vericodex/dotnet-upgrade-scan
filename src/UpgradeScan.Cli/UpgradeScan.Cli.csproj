@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <RollForward>latestMajor</RollForward>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <AssemblyName>upgrade-scan</AssemblyName>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>upgrade-scan</ToolCommandName>
+    <PackageId>dotnet-upgrade-scan</PackageId>
+    <Description>Free, deterministic, read-only assessment scanner for planning .NET Framework to modern .NET upgrades.</Description>
+    <Authors>Nitin Mukherjee</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>dotnet;upgrade;migration;assessment;netframework;analyzer</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <NoWarn>$(NoWarn);NU1903</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UpgradeScan.Core\UpgradeScan.Core.csproj" />
+    <ProjectReference Include="..\UpgradeScan.Analysis\UpgradeScan.Analysis.csproj" />
+    <ProjectReference Include="..\UpgradeScan.Reporting\UpgradeScan.Reporting.csproj" />
+    <ProjectReference Include="..\UpgradeScan.Rules\UpgradeScan.Rules.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\rules\**\*.yaml" Link="rules\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <PackageReference Include="MinVer" Version="6.0.0" PrivateAssets="All" />
+  </ItemGroup>
+</Project>

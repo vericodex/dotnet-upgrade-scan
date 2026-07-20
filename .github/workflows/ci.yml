@@ -1,0 +1,52 @@
+name: ci
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+jobs:
+  build-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # MinVer needs full history once packaging lands
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - run: dotnet build --configuration Release
+      - run: dotnet test --configuration Release --no-build --verbosity normal
+  rules-validate:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - run: dotnet run --project src/UpgradeScan.Cli --framework net10.0 -- rules validate rules
+  determinism:
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - name: scan twice, diff byte-for-byte
+        run: |
+          dotnet run --project src/UpgradeScan.Cli --framework net10.0 -- tests/fixtures/net472-two-proj --no-build --deterministic --format markdown --output /tmp/run1.md
+          dotnet run --project src/UpgradeScan.Cli --framework net10.0 -- tests/fixtures/net472-two-proj --no-build --deterministic --format markdown --output /tmp/run2.md
+          dotnet run --project src/UpgradeScan.Cli --framework net10.0 -- tests/fixtures/net472-two-proj --no-build --deterministic --format json --output /tmp/run1.json
+          dotnet run --project src/UpgradeScan.Cli --framework net10.0 -- tests/fixtures/net472-two-proj --no-build --deterministic --format json --output /tmp/run2.json
+          git diff --no-index --exit-code /tmp/run1.md /tmp/run2.md
+          git diff --no-index --exit-code /tmp/run1.json /tmp/run2.json

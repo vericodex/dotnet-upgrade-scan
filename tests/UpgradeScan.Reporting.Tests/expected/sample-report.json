@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "toolVersion": "1.2.3-test",
+  "rulesHash": "abcdef123456",
+  "targetFramework": "net10.0",
+  "solutionPath": "/s/All.sln",
+  "upgradeOrder": [
+    "Lib",
+    "App"
+  ],
+  "cycles": [],
+  "projects": [
+    {
+      "name": "Lib",
+      "path": "/s/Lib/Lib.csproj",
+      "language": "C#",
+      "style": "legacy",
+      "type": "library",
+      "tier": "syntactic",
+      "targetFrameworks": [
+        "net472"
+      ],
+      "packages": [
+        {
+          "id": "Newtonsoft.Json",
+          "version": "13.0.1"
+        }
+      ],
+      "packageFindings": [
+        {
+          "ruleId": "PKG0001",
+          "packageId": "Newtonsoft.Json",
+          "packageVersion": "13.0.1",
+          "verdict": "compatible",
+          "severity": "info"
+        }
+      ],
+      "apiFindings": [],
+      "effort": {
+        "score": 0,
+        "band": "s",
+        "floorsApplied": []
+      },
+      "diagnostics": []
+    },
+    {
+      "name": "App",
+      "path": "/s/App/App.csproj",
+      "language": "C#",
+      "style": "legacy",
+      "type": "aspNetMvc",
+      "tier": "syntactic",
+      "targetFrameworks": [
+        "net472"
+      ],
+      "packages": [
+        {
+          "id": "EntityFramework",
+          "version": "6.4.4"
+        },
+        {
+          "id": "System.Data.SqlClient",
+          "version": "4.8.5"
+        }
+      ],
+      "packageFindings": [
+        {
+          "ruleId": "PKG0002",
+          "packageId": "System.Data.SqlClient",
+          "packageVersion": "4.8.5",
+          "verdict": "replace",
+          "severity": "warning",
+          "replacementPackage": "Microsoft.Data.SqlClient",
+          "notes": "Namespace changes."
+        },
+        {
+          "ruleId": "PKG0003",
+          "packageId": "EntityFramework",
+          "packageVersion": "6.4.4",
+          "verdict": "partial",
+          "severity": "warning",
+          "replacementPackage": "Microsoft.EntityFrameworkCore"
+        }
+      ],
+      "apiFindings": [
+        {
+          "ruleId": "API0101",
+          "category": "web",
+          "severity": "blocker",
+          "symbol": "System.Web",
+          "file": "Controllers/HomeController.cs",
+          "line": 2,
+          "approximate": true,
+          "note": "No modern equivalent; requires migration to ASP.NET Core."
+        },
+        {
+          "ruleId": "API0102",
+          "category": "web",
+          "severity": "blocker",
+          "symbol": "System.Web.HttpContext.Current",
+          "file": "Controllers/HomeController.cs",
+          "line": 12,
+          "approximate": true
+        }
+      ],
+      "effort": {
+        "score": 26,
+        "band": "m",
+        "floorsApplied": []
+      },
+      "diagnostics": [
+        {
+          "code": "UPS0001",
+          "severity": "warning",
+          "message": "App: design-time build failed; degrading to manifest analysis."
+        }
+      ]
+    }
+  ],
+  "diagnostics": []
+}

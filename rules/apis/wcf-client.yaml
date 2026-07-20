@@ -1,0 +1,14 @@
+group: API0200
+technology: WCF client (System.ServiceModel)
+category: wcf
+patterns:
+  - id: API0201
+    kind: namespace
+    match: System.ServiceModel
+    severity: blocker
+    note: WCF client stacks move to CoreWCF client libraries or gRPC/REST rewrites.
+  - id: API0202
+    kind: type
+    match: System.ServiceModel.ChannelFactory
+    severity: blocker
+    note: CoreWCF provides a compatible ChannelFactory for many bindings.

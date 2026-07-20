@@ -1,0 +1,22 @@
+# Effort-score weights and bands. The formula is printed in every report:
+#   score = Σ (blocker findings per category × category weight)
+#         + (incompatible packages with no known replacement × noReplacement)
+#         + (incompatible packages with a known replacement × withReplacement)
+# Floors: project types listed under xlProjectTypes are always XL; VB projects go one size up.
+# Bands: S < s, M < m, L < l, XL >= l.
+categoryWeights:
+  web: 10
+  wcf: 8
+  default: 3
+packageWeights:
+  noReplacement: 15
+  withReplacement: 3
+bands:
+  s: 20
+  m: 60
+  l: 150
+floors:
+  xlProjectTypes:
+    - AspNetWebForms
+    - WcfService
+  vbOneSizeUp: true

@@ -1,0 +1,10 @@
+dotnet-upgrade-scan
+
+This project continues ideas from tools the community lost:
+- Microsoft .NET Upgrade Assistant (MIT, deprecated) — extension architecture concepts.
+- AWS Porting Assistant for .NET (Apache-2.0, closed to new customers) — assessment
+  concepts. Rule data derived from aws/porting-assistant-dotnet-datastore will carry
+  per-file provenance and this notice per Apache-2.0 §4.
+
+No source code from these projects is included in this repository unless explicitly
+marked with its origin and license.

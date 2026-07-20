@@ -1,0 +1,7 @@
+id: PKG0001
+package: Newtonsoft.Json
+verdict: compatible
+severity: info
+source: manual
+links:
+  - https://www.nuget.org/packages/Newtonsoft.Json

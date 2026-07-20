@@ -1,0 +1,10 @@
+id: PKG0002
+package: System.Data.SqlClient
+verdict: replace
+severity: warning
+replacement:
+  package: Microsoft.Data.SqlClient
+  notes: Namespace changes from System.Data.SqlClient to Microsoft.Data.SqlClient.
+source: manual
+links:
+  - https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace

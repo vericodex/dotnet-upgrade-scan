@@ -1,0 +1,10 @@
+id: PKG0003
+package: EntityFramework
+verdict: partial
+severity: warning
+replacement:
+  package: Microsoft.EntityFrameworkCore
+  notes: EF6 can run on modern .NET, but EF Core is the supported path; expect query and configuration rewrites.
+source: manual
+links:
+  - https://learn.microsoft.com/ef/efcore-and-ef6/

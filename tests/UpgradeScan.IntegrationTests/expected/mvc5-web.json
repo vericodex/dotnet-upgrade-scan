@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "toolVersion": "0.0.0-test",
+  "rulesHash": "constant00000",
+  "targetFramework": "net10.0",
+  "solutionPath": "<fixture>",
+  "upgradeOrder": [
+    "Mvc5Web"
+  ],
+  "cycles": [],
+  "projects": [
+    {
+      "name": "Mvc5Web",
+      "path": "<fixture>/Mvc5Web.csproj",
+      "language": "C#",
+      "style": "legacy",
+      "type": "aspNetMvc",
+      "tier": "syntactic",
+      "targetFrameworks": [
+        "net472"
+      ],
+      "packages": [
+        {
+          "id": "Microsoft.AspNet.Mvc",
+          "version": "5.2.9"
+        },
+        {
+          "id": "Newtonsoft.Json",
+          "version": "12.0.2"
+        }
+      ],
+      "packageFindings": [
+        {
+          "ruleId": "PKG0001",
+          "packageId": "Newtonsoft.Json",
+          "packageVersion": "12.0.2",
+          "verdict": "compatible",
+          "severity": "info"
+        }
+      ],
+      "apiFindings": [
+        {
+          "ruleId": "API0101",
+          "category": "web",
+          "severity": "blocker",
+          "symbol": "System.Web",
+          "file": "Controllers/HomeController.cs",
+          "line": 1,
+          "approximate": true,
+          "note": "No modern equivalent; requires migration to ASP.NET Core."
+        },
+        {
+          "ruleId": "API0101",
+          "category": "web",
+          "severity": "blocker",
+          "symbol": "System.Web.Mvc",
+          "file": "Controllers/HomeController.cs",
+          "line": 2,
+          "approximate": true,
+          "note": "No modern equivalent; requires migration to ASP.NET Core."
+        }
+      ],
+      "effort": {
+        "score": 20,
+        "band": "m",
+        "floorsApplied": []
+      },
+      "diagnostics": []
+    }
+  ],
+  "diagnostics": []
+}
