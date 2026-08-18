@@ -9,10 +9,15 @@
     <ToolCommandName>upgrade-scan</ToolCommandName>
     <PackageId>dotnet-upgrade-scan</PackageId>
     <Description>Free, deterministic, read-only assessment scanner for planning .NET Framework to modern .NET upgrades.</Description>
-    <Authors>Nitin Mukherjee</Authors>
+    <Authors>Vericodex</Authors>
+    <Copyright>Copyright (c) 2026 Nitin Mukherjee</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>dotnet;upgrade;migration;assessment;netframework;analyzer</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/vericodex/dotnet-upgrade-scan</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/vericodex/dotnet-upgrade-scan.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <MinVerTagPrefix>v</MinVerTagPrefix>
     <NoWarn>$(NoWarn);NU1903</NoWarn>
   </PropertyGroup>
@@ -31,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" />
     <PackageReference Include="MinVer" Version="6.0.0" PrivateAssets="All" />
   </ItemGroup>
 </Project>

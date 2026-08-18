@@ -62,4 +62,43 @@ public class CliSurfaceTests
             File.Delete(out2);
         }
     }
+
+    [Fact]
+    public void WritingTheReportToAFileConfirmsOnStdout()
+    {
+        var output = Path.Combine(Path.GetTempPath(), $"upscan-{Guid.NewGuid():N}.md");
+        var stdout = CaptureStdout([Fixtures.Path("net472-two-proj", "All.sln"),
+            "--no-build", "--deterministic", "--format", "markdown", "--output", output], output);
+
+        Assert.Contains(output, stdout);
+        Assert.Contains("github.com/vericodex/dotnet-upgrade-scan", stdout);
+    }
+
+    [Fact]
+    public void ReportPipedToStdoutIsNotPollutedByTheConfirmation()
+    {
+        var stdout = CaptureStdout([Fixtures.Path("net472-two-proj", "All.sln"),
+            "--no-build", "--deterministic", "--format", "markdown"], null);
+
+        Assert.StartsWith("# Upgrade assessment", stdout);
+        Assert.EndsWith("scan@vericodex.com\n", stdout.Replace("\r\n", "\n"));
+    }
+
+    private static string CaptureStdout(string[] args, string? outputToDelete)
+    {
+        var original = Console.Out;
+        var captured = new StringWriter();
+        try
+        {
+            Console.SetOut(captured);
+            Assert.Equal(0, RootCommandFactory.Create().Parse(args).Invoke());
+        }
+        finally
+        {
+            Console.SetOut(original);
+            if (outputToDelete is not null)
+                File.Delete(outputToDelete);
+        }
+        return captured.ToString();
+    }
 }

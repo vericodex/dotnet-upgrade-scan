@@ -123,9 +123,15 @@ public static class RootCommandFactory
                     ? new JsonReportRenderer().Render(model)
                     : new MarkdownReportRenderer().Render(model);
                 if (output is not null)
+                {
                     File.WriteAllText(output, report);
+                    Console.Out.WriteLine($"Report written to {output}");
+                    Console.Out.WriteLine($"{ReportBranding.HeuristicNotice} {ReportBranding.ProjectHost}");
+                }
                 else
+                {
                     Console.Out.Write(report);
+                }
             }
             return 0;
         }

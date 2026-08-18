@@ -51,5 +51,9 @@ public sealed class ConsoleSummaryRenderer
             var color = diagnostic.Severity == DiagnosticSeverity.Error ? "red" : "yellow";
             console.MarkupLine($"[{color}]{diagnostic.Code}[/] {Markup.Escape(diagnostic.Message)}");
         }
+
+        console.MarkupLine(
+            $"[dim]{Markup.Escape(ReportBranding.HeuristicNotice)} "
+            + $"{Markup.Escape(ReportBranding.ProjectHost)}[/]");
     }
 }

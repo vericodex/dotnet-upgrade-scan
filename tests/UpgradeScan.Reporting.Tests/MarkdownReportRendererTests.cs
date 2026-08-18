@@ -33,6 +33,59 @@ public class MarkdownReportRendererTests
     }
 
     [Fact]
+    public void FooterAttributesTheToolAndDowngradesItsOwnOutput()
+    {
+        var rendered = new MarkdownReportRenderer().Render(SampleModel.Build());
+
+        Assert.Contains("https://github.com/vericodex/dotnet-upgrade-scan", rendered);
+        Assert.Contains("Vericodex", rendered);
+        Assert.Contains("scan@vericodex.com", rendered);
+        Assert.Contains("heuristic", rendered);
+        Assert.EndsWith("\n", rendered);
+        Assert.True(rendered.LastIndexOf("Vericodex", StringComparison.Ordinal)
+            > rendered.LastIndexOf("## Diagnostics", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void HeaderLinksToTheProjectSoPastedExcerptsStayAttributable()
+    {
+        var rendered = new MarkdownReportRenderer().Render(SampleModel.Build());
+        var header = rendered[..rendered.IndexOf("## Summary", StringComparison.Ordinal)];
+
+        Assert.Contains("https://github.com/vericodex/dotnet-upgrade-scan", header);
+    }
+
+    [Fact]
+    public void FooterIsSeparatedIdenticallyWhetherOrNotDiagnosticsExist()
+    {
+        var withDiagnostics = new MarkdownReportRenderer().Render(SampleModel.Build());
+        var model = SampleModel.Build();
+        var withoutDiagnostics = new MarkdownReportRenderer().Render(model with
+        {
+            Projects = [.. model.Projects.Select(p => p with { Analysis = p.Analysis with { Diagnostics = [] } })],
+        });
+
+        Assert.Equal(Tail(withDiagnostics), Tail(withoutDiagnostics));
+
+        static string Tail(string report)
+        {
+            Assert.Contains("\n---\n", report);
+            return report[report.LastIndexOf("\n---\n", StringComparison.Ordinal)..];
+        }
+    }
+
+    [Fact]
+    public void FooterCarriesNoScanDateSoItStaysDeterministic()
+    {
+        var dated = new MarkdownReportRenderer().Render(
+            SampleModel.Build(new DateTimeOffset(2026, 7, 18, 12, 0, 0, TimeSpan.Zero)));
+        Assert.Contains("\n---\n", dated);
+        var footer = dated[dated.LastIndexOf("\n---\n", StringComparison.Ordinal)..];
+
+        Assert.DoesNotContain("2026-07-18", footer);
+    }
+
+    [Fact]
     public void MatchesCommittedGoldenFile()
     {
         var rendered = new MarkdownReportRenderer().Render(SampleModel.Build());

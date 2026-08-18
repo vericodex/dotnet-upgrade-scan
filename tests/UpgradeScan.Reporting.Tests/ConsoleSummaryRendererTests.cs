@@ -20,6 +20,15 @@ public class ConsoleSummaryRendererTests
     }
 
     [Fact]
+    public void ClosingLinePointsBackToTheProject()
+    {
+        var console = new TestConsole { Profile = { Width = 200 } };
+        new ConsoleSummaryRenderer().Render(SampleModel.Build(), console);
+
+        Assert.Contains("github.com/vericodex/dotnet-upgrade-scan", console.Output);
+    }
+
+    [Fact]
     public void CycleWarningIsRendered()
     {
         var console = new TestConsole();

@@ -1,6 +1,6 @@
 # dotnet-upgrade-scan
 
-[![CI](https://github.com/Prot0x/dotnet-upgrade-scan/actions/workflows/ci.yml/badge.svg)](https://github.com/Prot0x/dotnet-upgrade-scan/actions/workflows/ci.yml)
+[![CI](https://github.com/vericodex/dotnet-upgrade-scan/actions/workflows/ci.yml/badge.svg)](https://github.com/vericodex/dotnet-upgrade-scan/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/dotnet-upgrade-scan.svg)](https://www.nuget.org/packages/dotnet-upgrade-scan)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![.NET](https://img.shields.io/badge/.NET-8.0%20%7C%2010.0-512BD4)
@@ -52,7 +52,7 @@ upgrade-scan path/to/YourSolution.sln --output report.md
 Requires .NET 8 or later. To build from source instead:
 
 ```bash
-git clone https://github.com/Prot0x/dotnet-upgrade-scan.git
+git clone https://github.com/vericodex/dotnet-upgrade-scan.git
 cd dotnet-upgrade-scan
 dotnet run --project src/UpgradeScan.Cli -- path/to/YourSolution.sln --output report.md
 ```
@@ -135,6 +135,14 @@ Also valuable:
 ## Prior art & credits
 
 This project continues ideas from tools the community lost — the .NET Upgrade Assistant (Microsoft, MIT, deprecated) and Porting Assistant for .NET (AWS, Apache-2.0, closed to new customers). See [`NOTICE`](NOTICE) for lineage and license provenance.
+
+## Who builds this
+
+`dotnet-upgrade-scan` is built and maintained by **Vericodex**.
+
+The tool tells you the shape of an upgrade: what's there, in what order, and what will block you. It deliberately stops short of telling you how long it takes or what it costs — those are judgement calls, not facts a scanner can derive. If you need a costed, sequenced migration plan with blockers triaged and a person accountable for the number, that's the work Vericodex does: [scan@vericodex.com](mailto:scan@vericodex.com).
+
+Bug reports and rule contributions belong in [GitHub issues](https://github.com/vericodex/dotnet-upgrade-scan/issues), not email — the tool stays free and community-supported regardless.
 
 ## License
 
