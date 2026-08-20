@@ -81,7 +81,7 @@ public class CliSurfaceTests
             "--no-build", "--deterministic", "--format", "markdown"], null);
 
         Assert.StartsWith("# Upgrade assessment", stdout);
-        Assert.EndsWith("scan@vericodex.com\n", stdout.Replace("\r\n", "\n"));
+        Assert.EndsWith("[vericodex.com/contact](https://vericodex.com/contact)\n", stdout.Replace("\r\n", "\n"));
     }
 
     private static string CaptureStdout(string[] args, string? outputToDelete)

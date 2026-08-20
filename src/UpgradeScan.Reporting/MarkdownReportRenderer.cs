@@ -172,8 +172,9 @@ public sealed class MarkdownReportRenderer
           .Append("a blocker count is not a schedule, and this report does not estimate duration, team size, ")
           .Append("or budget.\n\n");
         sb.Append("For a costed, sequenced migration plan — blockers triaged, risks named, and a person accountable ")
-          .Append("for the number — talk to ").Append(ReportBranding.Company).Append(": ")
-          .Append(ReportBranding.ContactEmail).Append('\n');
+          .Append("for the number — talk to ").Append(ReportBranding.Company).Append(": [")
+          .Append(ReportBranding.SiteHost).Append("/contact](").Append(ReportBranding.ContactUrl)
+          .Append(")\n");
     }
 
     private static string Cell(string value) => value.Replace("|", "\\|");

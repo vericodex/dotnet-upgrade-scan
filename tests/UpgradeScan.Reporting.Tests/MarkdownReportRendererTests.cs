@@ -39,7 +39,7 @@ public class MarkdownReportRendererTests
 
         Assert.Contains("https://github.com/vericodex/dotnet-upgrade-scan", rendered);
         Assert.Contains("Vericodex", rendered);
-        Assert.Contains("scan@vericodex.com", rendered);
+        Assert.Contains("https://vericodex.com/contact", rendered);
         Assert.Contains("heuristic", rendered);
         Assert.EndsWith("\n", rendered);
         Assert.True(rendered.LastIndexOf("Vericodex", StringComparison.Ordinal)
