@@ -136,13 +136,6 @@ Also valuable:
 
 This project continues ideas from tools the community lost — the .NET Upgrade Assistant (Microsoft, MIT, deprecated) and Porting Assistant for .NET (AWS, Apache-2.0, closed to new customers). See [`NOTICE`](NOTICE) for lineage and license provenance.
 
-## Who builds this
-
-`dotnet-upgrade-scan` is built and maintained by **Vericodex**.
-
-The tool tells you the shape of an upgrade: what's there, in what order, and what will block you. It deliberately stops short of telling you how long it takes or what it costs — those are judgement calls, not facts a scanner can derive. If you need a costed, sequenced migration plan with blockers triaged and a person accountable for the number, that's the work Vericodex does: [vericodex.com/contact](https://vericodex.com/contact).
-
-Bug reports and rule contributions belong in [GitHub issues](https://github.com/vericodex/dotnet-upgrade-scan/issues), not email — the tool stays free and community-supported regardless.
 
 ## License
 
